@@ -1,3 +1,0 @@
-[submodule "vernemq"]
-	path = vernemq
-	url = git@github.com:vernemq/vernemq.git
