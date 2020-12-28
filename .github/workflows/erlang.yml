@@ -29,7 +29,7 @@ jobs:
         path: .
       
     - name: Compile
-      run: rebar3 compile
+      run: make rel
       
     - name: Run tests
       run: rebar3 do eunit, ct
