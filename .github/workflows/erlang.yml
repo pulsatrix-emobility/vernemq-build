@@ -17,6 +17,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        submodules: recursive
       
     - name: Compile
       run: cd vernemq; rebar3 compile
