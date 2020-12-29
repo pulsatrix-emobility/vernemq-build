@@ -35,8 +35,8 @@ jobs:
         ref: 1.11.0
         path: .
 
-    - name: Run tests
-      run: ./rebar3 as all_tests do dialyzer, eunit, ct
+#    - name: Run tests
+#      run: ./rebar3 as all_tests do dialyzer, eunit, ct
       
     - name: Build release
       run: make rel
