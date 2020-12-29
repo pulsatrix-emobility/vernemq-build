@@ -2,9 +2,8 @@ name: Erlang CI
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches: 
+      - master
 
 env:
   VMQ_VERSION: 1.11.0
@@ -55,6 +54,7 @@ jobs:
       run: tar -C _build/default/rel/vernemq -cvzf /vernemq-pulsatrix-${{ steps.semanticversion.outputs.new_tag }}.tgz . 
       
     - name: Create Release
+      id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
