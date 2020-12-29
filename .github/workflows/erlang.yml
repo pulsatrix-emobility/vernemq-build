@@ -32,10 +32,19 @@ jobs:
       uses: actions/checkout@v2
       with:
         repository: vernemq/vernemq
+        ref: 1.11.0
         path: .
+
+    - name: Run tests
+      run: ./rebar3 as all_tests do dialyzer, eunit, ct
       
-    - name: Compile
+    - name: Build release
       run: make rel
       
-    - name: Run tests
-      run: rebar3 do eunit, ct
+    - name: Package release
+      run: tar -C _build/default/rel/vernemq -cvzf /vernemq-pulsatrix-1.11.0.tgz . 
+      
+    - uses: actions/upload-artifact@v2
+      with:
+        name: vernemq-pulsatrix
+        path: vernemq-pulsatrix-1.11.0.tgz
