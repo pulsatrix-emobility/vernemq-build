@@ -14,11 +14,9 @@ jobs:
       image: ubuntu:focall@sha256:c95a8e48bf88e9849f3e0f723d9f49fa12c5a00cfc6e60d2bc99d87555295e4c
       
     steps:
-    - name: install stuff
-      run: |
-        apt-get update
-        DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata keyboard-configuration
-        apt-get install bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev
+    - run: apt-get update
+    - run: DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata keyboard-configuration
+    - run: apt-get install -y bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev
      
     - name: install erlang
       run: |
