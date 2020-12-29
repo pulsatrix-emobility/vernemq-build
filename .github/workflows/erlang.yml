@@ -16,14 +16,14 @@ jobs:
     steps:
     - name: install stuff
       run: |
-        DEBIAN_FRONTEND=noninteractive sudo apt-get install -y --no-install-recommends tzdata keyboard-configuration
-        sudo apt-get -y install bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev
+        DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata keyboard-configuration
+        apt-get -y install bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev
      
     - name: install erlang
       run: |
-        wget -O- https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo apt-key add -
-        echo "deb https://packages.erlang-solutions.com/ubuntu focal contrib" | sudo tee /etc/apt/sources.list.d/erl.list
-        sudo apt update && sudo apt-get install erlang
+        wget -O- https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | apt-key add -
+        echo "deb https://packages.erlang-solutions.com/ubuntu focal contrib" | tee /etc/apt/sources.list.d/erl.list
+        apt update && apt-get install erlang
       
     - name: Checkout vernemq
       uses: actions/checkout@v2
