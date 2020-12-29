@@ -22,6 +22,7 @@ jobs:
       with:
         release_branches: master
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        dry_run: true
     
     - name: install stuff
       run: |
