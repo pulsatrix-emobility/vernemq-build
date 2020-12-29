@@ -14,15 +14,19 @@ jobs:
       image: ubuntu:focall@sha256:c95a8e48bf88e9849f3e0f723d9f49fa12c5a00cfc6e60d2bc99d87555295e4c
       
     steps:
-    - run: apt-get update
-    - run: DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends tzdata keyboard-configuration
-    - run: apt-get install -y bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev
+    - name: install stuff
+      run: |
+        export DEBIAN_FRONTEND=noninteractive;
+        apt-get update;
+        apt-get install -y --no-install-recommends tzdata keyboard-configuration;
+        apt-get install -y bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev;
      
     - name: install erlang
       run: |
         wget -O- https://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | apt-key add -
         echo "deb https://packages.erlang-solutions.com/ubuntu focal contrib" | tee /etc/apt/sources.list.d/erl.list
-        apt update && apt-get install erlang
+        apt update
+        apt-get install -y erlang
       
     - name: Checkout vernemq
       uses: actions/checkout@v2
