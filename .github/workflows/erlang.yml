@@ -47,4 +47,4 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: vernemq-pulsatrix
-        path: vernemq-pulsatrix-1.11.0.tgz
+        path: /vernemq-pulsatrix-1.11.0.tgz
