@@ -16,8 +16,16 @@ jobs:
       image: ubuntu:focal
       
     steps:
+    # install goes first so we have a real git available
+    - name: install stuff
+      run: |
+        export DEBIAN_FRONTEND=noninteractive;
+        apt-get update;
+        apt-get install -y --no-install-recommends tzdata keyboard-configuration;
+        apt-get install -y bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev;
+     
     # must check out current project so we know the tags
-    - name: Checkout vernemq
+    - name: Checkout main project
       uses: actions/checkout@v2
       
     - name: Bump version and push tag
@@ -28,14 +36,7 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         dry_run: true
     
-    - name: install stuff
-      run: |
-        export DEBIAN_FRONTEND=noninteractive;
-        apt-get update;
-        apt-get install -y --no-install-recommends tzdata keyboard-configuration;
-        apt-get install -y bash procps openssl iproute2 curl jq libsnappy-dev net-tools git make gcc g++ wget gnupg libssl-dev;
-     
-    - name: install erlang
+    - name: install erlang from deb
       run: |
         wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_amd64.deb
         apt install -y --fix-broken ./esl-erlang_*.deb
