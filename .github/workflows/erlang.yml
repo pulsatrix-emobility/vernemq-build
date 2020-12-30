@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     container:
-      image: ubuntu:focal
+      image: debian:stretch
       
     steps:
     # install goes first so we have a real git available
@@ -38,7 +38,7 @@ jobs:
     
     - name: install erlang from deb
       run: |
-        wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~ubuntu~focal_amd64.deb
+        wget https://packages.erlang-solutions.com/erlang/debian/pool/esl-erlang_22.3.4.9-1~debian~stretch_amd64.deb
         apt install -y --fix-broken ./esl-erlang_*.deb
       
     - name: Checkout vernemq
