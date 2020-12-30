@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     container:
-      image: debian:buster
+      image: ubuntu:focal
       
     steps:
     - name: Bump version and push tag
