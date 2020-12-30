@@ -16,6 +16,10 @@ jobs:
       image: ubuntu:focal
       
     steps:
+    # must check out current project so we know the tags
+    - name: Checkout vernemq
+      uses: actions/checkout@v2
+      
     - name: Bump version and push tag
       id: semanticversion
       uses: hennejg/github-tag-action@v4.2.4
@@ -41,13 +45,13 @@ jobs:
       with:
         repository: vernemq/vernemq
         ref: ${{ env.VMQ_VERSION }}
-        path: .
+        path: vernemq
 
     - name: Build release
-      run: make rel
+      run: cd vernemq; make rel
       
     - name: Package release
-      run: tar -C _build/default/rel/vernemq -cvzf /vernemq-pulsatrix-${{ steps.semanticversion.outputs.new_tag }}.tgz . 
+      run: tar -C vernemq/_build/default/rel/vernemq -cvzf /vernemq-pulsatrix-${{ steps.semanticversion.outputs.new_tag }}.tgz . 
       
     - name: Create Release
       id: create_release
